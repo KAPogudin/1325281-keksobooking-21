@@ -1,15 +1,7 @@
 'use strict';
 
 const ADS_NUMBER = 8;
-const AVATAR_IMG = [
-  `img/avatars/user01.png`,
- `img/avatars/user02.png`,
- `img/avatars/user03.png`,
- `img/avatars/user04.png`,
- `img/avatars/user05.png`,
- `img/avatars/user06.png`,
- `img/avatars/user07.png`,
- `img/avatars/user08.png`];
+const AVATAR_IMG = [`img/avatars/user01.png`, `img/avatars/user02.png`, `img/avatars/user03.png`, `img/avatars/user04.png`, `img/avatars/user05.png`, `img/avatars/user06.png`, `img/avatars/user07.png`, `img/avatars/user08.png`];
 const ADS_TITLE = [`Первое предложение`, `Второе предложение`, `Третье предложение`];
 const Price = {
   MIN: 2000,
@@ -22,14 +14,8 @@ const ADS_TYPE_RUS = {
   house: `Дом`,
   bungalow: `Бунгало`,
 };
-const ROOMS = {
-  MIN: 1,
-  MAX: 4,
-};
-const GUESTS = {
-  MIN: 1,
-  MAX: 4,
-};;
+const ROOMS = [1, 2, 3, 4];
+const GUESTS = [1, 2, 3, 4];
 const CHECKOUT = [`12:00`, `13:00`, `14:00`];
 const FEATURES = [`wifi`, `dishwasher`, `parking`, `washer`, `elevator`, `conditioner`];
 const DESCRIPTIONS = [`Описание первое`, `Описание второе`, `Описание третье`];
@@ -40,11 +26,6 @@ const Coordinates = {
   Y_MIN: 130,
   Y_MAX: 630,
 };
-const PIN_HEIGHT= 65;
-const PIN_WIDTH= 65;
-const AVATAR_WIDTH = 45;
-const AVATAR_HEIGHT = 40;
-const PIN_ARROW_HEIGHT= 22;
 const PIN = 40;
 const map = document.querySelector(`.map`);
 //
@@ -222,8 +203,6 @@ const allElementsActivate = (element) => {
   }
 }
 
-
-
 const activationForm = () => {
   map.classList.remove(`map--faded`);
   adForm.classList.remove(`ad-form--disabled`);
@@ -237,19 +216,3 @@ mapPinMain.addEventListener('click', function() {
   map.insertBefore(fragmentCard, insertBlock);
   activationForm();
 })
-//*** */
-
-  const errorTemplate = document.querySelector(`#error`).content.querySelector(`.error`);
-  const widthMap = mapPins.offsetWidth;
-  const errorPopup = errorTemplate.cloneNode(true);
-  const errorButton = errorPopup.querySelector(`.error__button`);
-  const messageContainer = errorPopup.querySelector(`.error__message`);
-
-  let locationStart = {
-    x: mapPinMain.style.left = 570 - 32,
-    y: mapPinMain.style.top = 375 - 65,
-  };
-
-  let address = document.querySelector(`#address`);
-  mapAdress.setAttribute(`disabled`, true);
-  mapAdress.value = `${locationStart.x}, ${locationStart.y}`;
