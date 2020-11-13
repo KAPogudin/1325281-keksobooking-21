@@ -2,15 +2,15 @@
 
 (function () {
   let locationStart = {
-    x: window.maps.openPinPage.style.left = 570 - 32,
-    y: window.maps.openPinPage.style.top = 375 - 65,
+    x: window.maps.openPinPage.style.left = Math.round(parseInt(window.maps.openPinPage.style.left, 10) + window.main.WIDTH_SIZE_PIN),
+    y: window.maps.openPinPage.style.top = parseInt(window.maps.openPinPage.style.top, 10) + window.main.HEIGHT_SIZE_PIN,
   };
 
   let address = document.querySelector(`#address`);
   address.setAttribute(`disabled`, true);
   address.value = `${locationStart.x}, ${locationStart.y}`;
 
-  let titleAdd = window.main.MAIN.querySelector(`#title`);
+  let titleAdd = window.main.CONTEINER.querySelector(`#title`);
 
   titleAdd.addEventListener(`input`, function () {
     let valueLength = titleAdd.value.length;
@@ -25,7 +25,7 @@
     titleAdd.reportValidity();
   });
 
-  let price = window.main.MAIN.querySelector(`#price`);
+  let price = window.main.CONTEINER.querySelector(`#price`);
 
   price.addEventListener(`input`, function (e) {
     e.preventDefault();
@@ -38,8 +38,8 @@
   });
 
 
-  let roomNumber = window.main.MAIN.querySelector(`#room_number`);
-  let capacity = window.main.MAIN.querySelector(`#capacity`);
+  let roomNumber = window.main.CONTEINER.querySelector(`#room_number`);
+  let capacity = window.main.CONTEINER.querySelector(`#capacity`);
 
   let getValidationRooms = function () {
     let valueRooms = roomNumber.value;
@@ -72,8 +72,8 @@
     capacity.reportValidity();
   });
 
-  let timeIn = window.main.MAIN.querySelector(`#timein`);
-  let timeOut = window.main.MAIN.querySelector(`#timeout`);
+  let timeIn = window.main.CONTEINER.querySelector(`#timein`);
+  let timeOut = window.main.CONTEINER.querySelector(`#timeout`);
 
   timeIn.addEventListener(`change`, function () {
     timeOut.value = timeIn.value;
@@ -82,7 +82,7 @@
     timeIn.value = timeOut.value;
   });
 
-  let roomType = window.main.MAIN.querySelector(`#type`);
+  let roomType = window.main.CONTEINER.querySelector(`#type`);
 
   let getMinValuePrice = function () {
     let priceValue = price.value;
@@ -112,7 +112,25 @@
     price.reportValidity();
   });
 
+  window.maps.adForm.addEventListener(`submit`, function (evt) {
+    window.form.getValidationRooms();
+    window.form.roomNumber.reportValidity();
+    window.form.address.removeAttribute(`disabled`);
+    if (window.maps.adForm.checkValidity()) {
+      window.backend.upload(new FormData(window.maps.adForm), window.condition.onFormSubmit, window.condition.onErrorUpload);
+    }
+    window.form.address.setAttribute(`disabled`, true);
+    evt.preventDefault();
+  });
+
   window.form = {
     address,
+    roomNumber,
+    capacity,
+    getValidationRooms,
+    locationStart,
+    getMinValuePrice,
+    price,
+    titleAdd
   };
 })();

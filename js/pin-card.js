@@ -3,12 +3,13 @@
 (function () {
   let markElementTemplate = document.querySelector(`#pin`).content.querySelector(`.map__pin`);
   let cardElementTemplate = document.querySelector(`#card`).content.querySelector(`.map__card`);
-  let markElement = document.querySelector(`.map__pins`);
+  let successTemplate = document.querySelector(`#success`).content.querySelector(`.success`);
+  let errorTemplate = document.querySelector(`#error`).content.querySelector(`.error`);
 
   let renderMark = function (newAd) {
     let markElementItem = markElementTemplate.cloneNode(true);
-    markElementItem.style.left = newAd.location.x + 25 + `px`;
-    markElementItem.style.top = newAd.location.y + 70 + `px`;
+    markElementItem.style.left = newAd.location.x + window.main.BUTTON_WIDTH_SIZE_PIN + `px`;
+    markElementItem.style.top = newAd.location.y + window.main.BUTTON_HEIGHT_SIZE_PIN + `px`;
     let avatarImg = markElementItem.querySelector(`img`);
     avatarImg.src = newAd.author.avatar;
     avatarImg.alt = `фото пользователя`;
@@ -46,37 +47,21 @@
     cardElementItem.querySelector(`.popup__avatar`).src = newAd.author.avatar;
     return cardElementItem;
   };
-  let pins = [];
-  let pinsElements = [];
-  let onSuccess = function (pinsElem) {
-    let fragment = document.createDocumentFragment();
-    for (let i = 0; i < pinsElem.length; i++) {
-      fragment.appendChild(renderMark(pinsElem[i]));
-    }
-    window.pinCard.pinsElements = Array.from(pinsElem);
-    markElement.appendChild(fragment);
-    window.pinCard.pins = Array.from(window.main.MAIN.querySelectorAll(`.map__pin:not(.map__pin--main)`));
+
+  let renderSuccess = function () {
+    let successElement = successTemplate.cloneNode(true);
+    return successElement;
   };
 
-
-  let errorHandler = function (errorMessage) {
-    let node = document.createElement(`div`);
-    node.style = `padding: 20px; transform: translateX(-50%); z-index: 100; margin: 0 auto; text-align: center; background-color: #ffffff; border: 3px solid red; border-radius: 10px;`;
-    node.style.position = `absolute`;
-    node.style.left = 50 + `%`;
-    node.style.top = 50 + `%`;
-    node.style.fontSize = `30px`;
-
-    node.textContent = errorMessage;
-    document.body.insertAdjacentElement(`afterbegin`, node);
+  let renderError = function () {
+    let errorElement = errorTemplate.cloneNode(true);
+    return errorElement;
   };
 
   window.pinCard = {
-    markElement,
     renderCard,
-    onSuccess,
-    pinsElements,
-    pins,
-    errorHandler
+    renderMark,
+    renderSuccess,
+    renderError
   };
 })();

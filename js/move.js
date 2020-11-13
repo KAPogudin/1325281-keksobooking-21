@@ -26,15 +26,15 @@
       };
 
       let locationAddress = {
-        x: window.maps.openPinPage.offsetLeft - shift.x - 32,
-        y: window.maps.openPinPage.offsetTop - shift.y - 65
+        x: window.maps.openPinPage.offsetLeft - shift.x + window.main.WIDTH_SIZE_PIN,
+        y: window.maps.openPinPage.offsetTop - shift.y + window.main.HEIGHT_SIZE_PIN
       };
       window.form.address.value = `${locationAddress.x}, ${locationAddress.y}`;
 
       if (locationAddress.y < 630 && locationAddress.y > 129) {
         window.maps.openPinPage.style.top = (window.maps.openPinPage.offsetTop - shift.y) + `px`;
       }
-      if (locationAddress.x < 1134 && locationAddress.x > -65) {
+      if (locationAddress.x < document.querySelector(`.map__overlay`).clientWidth + 1 && locationAddress.x > -32 && locationAddress.x >= 0) {
         window.maps.openPinPage.style.left = (window.maps.openPinPage.offsetLeft - shift.x) + `px`;
       }
     };
