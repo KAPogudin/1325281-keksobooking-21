@@ -10,7 +10,11 @@
   const MIN_NAME_LENGTH = 30;
   const MAX_NAME_LENGTH = 100;
   const MAX_PRICE = 1000000;
-  const MAIN = document.querySelector(`main`);
+  const CONTEINER = document.querySelector(`main`);
+  const WIDTH_SIZE_PIN = 32;
+  const HEIGHT_SIZE_PIN = 75;
+  const BUTTON_WIDTH_SIZE_PIN = 32;
+  const BUTTON_HEIGHT_SIZE_PIN = 65;
 
   window.main = {
     CHECKOUT_ARR,
@@ -21,7 +25,11 @@
     MIN_NAME_LENGTH,
     MAX_NAME_LENGTH,
     MAX_PRICE,
-    MAIN
+    CONTEINER,
+    WIDTH_SIZE_PIN,
+    HEIGHT_SIZE_PIN,
+    BUTTON_WIDTH_SIZE_PIN,
+    BUTTON_HEIGHT_SIZE_PIN
   };
 
 })();
